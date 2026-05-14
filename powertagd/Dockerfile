@@ -12,7 +12,9 @@ COPY powertag2mqtt/ .
 RUN go mod download && CGO_ENABLED=0 go build -o powertag2mqtt .
 
 # Stage 3: Runtime
-FROM ghcr.io/home-assistant/amd64-base:3.20
+FROM alpine:3.20
+
+RUN apk add --no-cache jq curl bash
 
 COPY --from=build-powertagd /build/powertagd /usr/bin/powertagd
 COPY --from=build-mqtt /build/powertag2mqtt /usr/bin/powertag2mqtt
