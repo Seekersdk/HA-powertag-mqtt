@@ -10,9 +10,6 @@ boot: auto
 uart: true
 options:
   device: "/dev/ttyACM0"
-  mqtt_broker: ""
-  mqtt_user: ""
-  mqtt_password: ""
 schema:
   device: str
   mqtt_broker: str?
