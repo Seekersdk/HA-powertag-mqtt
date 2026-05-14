@@ -1,5 +1,5 @@
 name: PowerTagd
-version: "1.0.0"
+version: "1.1.0"
 slug: powertagd
 description: "Schneider Electric PowerTag energy monitor to MQTT bridge with Home Assistant auto-discovery"
 url: "https://github.com/SeekersDK/HA-powertag-mqtt"
