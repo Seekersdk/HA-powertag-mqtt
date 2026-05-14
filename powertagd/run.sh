@@ -17,13 +17,10 @@ echo "[DEBUG] SUPERVISOR_TOKEN set: $([ -n "$SUPERVISOR_TOKEN" ] && echo 'yes' |
 # If broker is empty, try HA's Mosquitto service API
 if [ -z "$BROKER" ]; then
     echo "[DEBUG] Trying Supervisor API..."
-    MQTT_INFO=$(curl -sv -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" http://supervisor/services/mqtt 2>&1) || true
+    MQTT_INFO=$(curl -s -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" http://supervisor/services/mqtt) || true
     echo "[DEBUG] Supervisor response: ${MQTT_INFO}"
 
-    MQTT_HOST=$(echo "$MQTT_INFO" | grep -v '^\*\|^>\|^<\|^{' | jq -r '.data.host // empty' 2>/dev/null || true)
-    if [ -z "$MQTT_HOST" ]; then
-        MQTT_HOST=$(echo "$MQTT_INFO" | jq -r '.data.host // empty' 2>/dev/null || true)
-    fi
+    MQTT_HOST=$(echo "$MQTT_INFO" | jq -r '.data.host // empty' 2>/dev/null || true)
     MQTT_PORT=$(echo "$MQTT_INFO" | jq -r '.data.port // empty' 2>/dev/null || true)
     MQTT_USER=$(echo "$MQTT_INFO" | jq -r '.data.username // empty' 2>/dev/null || true)
     MQTT_PASS=$(echo "$MQTT_INFO" | jq -r '.data.password // empty' 2>/dev/null || true)
