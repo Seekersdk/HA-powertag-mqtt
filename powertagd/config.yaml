@@ -1,0 +1,20 @@
+name: PowerTagd
+version: "1.0.0"
+slug: powertagd
+description: "Schneider Electric PowerTag energy monitor to MQTT bridge with Home Assistant auto-discovery"
+url: "https://github.com/SeekersDK/HA-powertag-mqtt"
+arch:
+  - amd64
+startup: services
+boot: auto
+uart: true
+options:
+  device: "/dev/ttyACM0"
+  mqtt_broker: ""
+  mqtt_user: ""
+  mqtt_password: ""
+schema:
+  device: str
+  mqtt_broker: str?
+  mqtt_user: str?
+  mqtt_password: str?

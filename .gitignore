@@ -1,0 +1,4 @@
+*.o
+*.a
+powertagd-src/powertagd
+powertagd-src/powertagctl
